@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo de CSS Animation</title>
+    <link rel="stylesheet" href="animation-style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 Guia Interativo de CSS Animation</h1>
+
+        <!-- Seção 1: O que é Animation -->
+        <div class="card">
+            <h2>1. O que é CSS Animation?</h2>
+            <div class="explanation">
+                <strong>Animation</strong> permite criar animações complexas com múltiplos estados, usando <strong>@keyframes</strong>. Diferente de Transition (que vai de A para B), Animation pode ter vários pontos intermediários e rodar automaticamente!
+            </div>
+            
+            <div class="comparison">
+                <div class="comp-item">
+                    <h3>🔄 Transition</h3>
+                    <p>✅ De A para B</p>
+                    <p>✅ Precisa de trigger (hover, click)</p>
+                    <p>✅ Simples e direto</p>
+                </div>
+                <div class="comp-item">
+                    <h3>🎬 Animation</h3>
+                    <p>✅ Múltiplos estados (A→B→C→D)</p>
+                    <p>✅ Inicia automaticamente</p>
+                    <p>✅ Loops, delays, direções</p>
+                </div>
+            </div>
+
+            <p><strong>Sintaxe básica:</strong></p>
+            <div class="code-display">
+<span class="comment">/* 1. Definir os keyframes */</span>
+<span class="keyword">@keyframes</span> <span class="function">minhaAnimacao</span> {
+    <span class="value">0%</span> { <span class="property">transform</span>: <span class="value">scale(1)</span>; }
+    <span class="value">50%</span> { <span class="property">transform</span>: <span class="value">scale(1.5)</span>; }
+    <span class="value">100%</span> { <span class="property">transform</span>: <span class="value">scale(1)</span>; }
+}
+
+<span class="comment">/* 2. Aplicar a animação */</span>
+<span class="selector">.elemento</span> {
+    <span class="property">animation</span>: <span class="value">minhaAnimacao 2s ease infinite</span>;
+}
+            </div>
+        </div>
+
+        <!-- Seção 2: Playground Interativo -->
+        <div class="card">
+            <h2>2. Playground de Animação</h2>
+            <p>Crie sua própria animação ajustando os controles:</p>
+            
+            <div class="demo-area">
+                <div class="animated-box" id="playgroundBox">
+                    <span>🚀</span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label>Nome da Animação:
+                        <select id="animationName">
+                            <option value="bounce">Bounce (Pular)</option>
+                            <option value="spin">Spin (Girar)</option>
+                            <option value="pulse">Pulse (Pulsar)</option>
+                            <option value="shake">Shake (Tremer)</option>
+                            <option value="slideIn">Slide In (Deslizar)</option>
+                            <option value="fadeInOut">Fade In/Out</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="control-group">
+                    <label>Duração: <span class="value-display" id="durationValue">2s</span>
+                        <input type="range" id="duration" min="0.5" max="5" step="0.5" value="2">
+                    </label>
+                </div>
+
+                <div class="control-group">
+                    <label>Timing Function:
+                        <select id="timing">
+                            <option value="ease">ease</option>
+                            <option value="linear">linear</option>
+                            <option value="ease-in">ease-in</option>
+                            <option value="ease-out">ease-out</option>
+                            <option value="ease-in-out">ease-in-out</option>
+                            <option value="cubic-bezier(0.68, -0.55, 0.265, 1.55)">cubic-bezier (bounce)</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="control-group">
+                    <label>Iterações:
+                        <select id="iterations">
+                            <option value="1">1 vez</option>
+                            <option value="2">2 vezes</option>
+                            <option value="3">3 vezes</option>
+                            <option value="infinite" selected>Infinito</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="control-group">
+                    <label>Direção:
+                        <select id="direction">
+                            <option value="normal">Normal (→)</option>
+                            <option value="reverse">Reverse (←)</option>
+                            <option value="alternate">Alternate (⇄)</option>
+                            <option value="alternate-reverse">Alternate Reverse (⇆)</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="control-group">
+                    <label>Delay: <span class="value-display" id="delayValue">0s</span>
+                        <input type="range" id="delay" min="0" max="3" step="0.5" value="0">
+                    </label>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button id="playBtn">▶️ Play</button>
+                <button id="pauseBtn">⏸️ Pause</button>
+                <button id="resetBtn">🔄 Reset</button>
+            </div>
+
+            <div class="code-display" id="codeDisplay"></div>
+        </div>
+
+        <!-- Seção 3: Keyframes Explicados -->
+        <div class="card">
+            <h2>3. Como Funcionam os @keyframes</h2>
+            <div class="explanation">
+                <strong>Keyframes</strong> são os "quadros-chave" da animação. Você define estados em diferentes percentuais do tempo total.
+            </div>
+
+            <div class="keyframe-demo">
+                <div class="timeline">
+                    <div class="timeline-marker" style="left: 0%;">
+                        <div class="marker-dot"></div>
+                        <span>0%</span>
+                        <div class="marker-state">Início</div>
+                    </div>
+                    <div class="timeline-marker" style="left: 33%;">
+                        <div class="marker-dot"></div>
+                        <span>33%</span>
+                        <div class="marker-state">Meio 1</div>
+                    </div>
+                    <div class="timeline-marker" style="left: 66%;">
+                        <div class="marker-dot"></div>
+                        <span>66%</span>
+                        <div class="marker-state">Meio 2</div>
+                    </div>
+                    <div class="timeline-marker" style="left: 100%;">
+                        <div class="marker-dot"></div>
+                        <span>100%</span>
+                        <div class="marker-state">Fim</div>
+                    </div>
+                    <div class="timeline-line"></div>
+                    <div class="timeline-box" id="timelineBox">📦</div>
+                </div>
+            </div>
+
+            <div class="code-display">
+<span class="keyword">@keyframes</span> <span class="function">exemplo</span> {
+    <span class="value">0%</span> { <span class="property">left</span>: <span class="value">0%</span>; <span class="property">background</span>: <span class="value">red</span>; }
+    <span class="value">33%</span> { <span class="property">left</span>: <span class="value">33%</span>; <span class="property">background</span>: <span class="value">yellow</span>; }
+    <span class="value">66%</span> { <span class="property">left</span>: <span class="value">66%</span>; <span class="property">background</span>: <span class="value">blue</span>; }
+    <span class="value">100%</span> { <span class="property">left</span>: <span class="value">100%</span>; <span class="property">background</span>: <span class="value">green</span>; }
+}
+            </div>
+        </div>
+
+        <!-- Seção 4: Galeria de Animações -->
+        <div class="card">
+            <h2>4. Galeria de Animações Prontas</h2>
+            <p>Clique em qualquer caixa para ver a animação:</p>
+
+            <div class="gallery">
+                <div class="gallery-item" data-animation="bounce">
+                    <div class="gallery-box">Bounce</div>
+                    <p>Efeito de pulo</p>
+                </div>
+                <div class="gallery-item" data-animation="spin">
+                    <div class="gallery-box">Spin</div>
+                    <p>Rotação 360°</p>
+                </div>
+                <div class="gallery-item" data-animation="pulse">
+                    <div class="gallery-box">Pulse</div>
+                    <p>Pulsar crescer/encolher</p>
+                </div>
+                <div class="gallery-item" data-animation="shake">
+                    <div class="gallery-box">Shake</div>
+                    <p>Tremor horizontal</p>
+                </div>
+                <div class="gallery-item" data-animation="swing">
+                    <div class="gallery-box">Swing</div>
+                    <p>Balanço pendular</p>
+                </div>
+                <div class="gallery-item" data-animation="flip">
+                    <div class="gallery-box">Flip</div>
+                    <p>Virar como carta</p>
+                </div>
+                <div class="gallery-item" data-animation="rubber">
+                    <div class="gallery-box">Rubber</div>
+                    <p>Borracha elástica</p>
+                </div>
+                <div class="gallery-item" data-animation="jello">
+                    <div class="gallery-box">Jello</div>
+                    <p>Gelatina tremendo</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção 5: Propriedades da Animation -->
+        <div class="card">
+            <h2>5. Propriedades da Animation</h2>
+            
+            <div class="properties-grid">
+                <div class="property-card">
+                    <h3>animation-name</h3>
+                    <p>Nome do @keyframes a ser usado</p>
+                    <code>animation-name: bounce;</code>
+                </div>
+                <div class="property-card">
+                    <h3>animation-duration</h3>
+                    <p>Tempo total da animação</p>
+                    <code>animation-duration: 2s;</code>
+                </div>
+                <div class="property-card">
+                    <h3>animation-timing-function</h3>
+                    <p>Velocidade ao longo do tempo</p>
+                    <code>animation-timing-function: ease;</code>
+                </div>
+                <div class="property-card">
+                    <h3>animation-delay</h3>
+                    <p>Espera antes de iniciar</p>
+                    <code>animation-delay: 1s;</code>
+                </div>
+                <div class="property-card">
+                    <h3>animation-iteration-count</h3>
+                    <p>Quantas vezes repetir</p>
+                    <code>animation-iteration-count: infinite;</code>
+                </div>
+                <div class="property-card">
+                    <h3>animation-direction</h3>
+                    <p>Direção da animação</p>
+                    <code>animation-direction: alternate;</code>
+                </div>
+                <div class="property-card">
+                    <h3>animation-fill-mode</h3>
+                    <p>Estado antes/depois</p>
+                    <code>animation-fill-mode: forwards;</code>
+                </div>
+                <div class="property-card">
+                    <h3>animation-play-state</h3>
+                    <p>Pausar ou rodar</p>
+                    <code>animation-play-state: paused;</code>
+                </div>
+            </div>
+
+            <div class="explanation">
+                <strong>💡 Atalho (Shorthand):</strong><br>
+                <code>animation: nome duração timing delay iteração direção fill-mode;</code><br>
+                <code>animation: bounce 2s ease 0s infinite alternate forwards;</code>
+            </div>
+        </div>
+
+        <!-- Seção 6: Exemplos Práticos -->
+        <div class="card">
+            <h2>6. Casos de Uso Práticos</h2>
+            
+            <div class="use-cases">
+                <div class="use-case">
+                    <h3>🔔 Notificação</h3>
+                    <div class="demo-mini">
+                        <div class="notification-badge">3</div>
+                    </div>
+                    <p>Chamar atenção para notificações</p>
+                </div>
+
+                <div class="use-case">
+                    <h3>⏳ Loading</h3>
+                    <div class="demo-mini">
+                        <div class="spinner"></div>
+                    </div>
+                    <p>Indicador de carregamento</p>
+                </div>
+
+                <div class="use-case">
+                    <h3>✨ Sparkle</h3>
+                    <div class="demo-mini">
+                        <div class="sparkle">⭐</div>
+                    </div>
+                    <p>Destaque para elementos novos</p>
+                </div>
+
+                <div class="use-case">
+                    <h3>🎯 Hover Attention</h3>
+                    <div class="demo-mini">
+                        <button class="attention-btn">Click me!</button>
+                    </div>
+                    <p>Botão chamando atenção</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção 7: Dicas e Boas Práticas -->
+        <div class="card">
+            <h2>7. Dicas e Boas Práticas</h2>
+            
+            <div class="tips">
+                <div class="tip success">
+                    <strong>✅ FAÇA:</strong>
+                    <ul>
+                        <li>Use transform e opacity para melhor performance</li>
+                        <li>Mantenha animações entre 200ms e 500ms</li>
+                        <li>Use will-change para animações complexas</li>
+                        <li>Teste em diferentes dispositivos</li>
+                        <li>Permita que usuários desabilitem animações</li>
+                    </ul>
+                </div>
+
+                <div class="tip warning">
+                    <strong>❌ EVITE:</strong>
+                    <ul>
+                        <li>Animar propriedades como width, height, top, left</li>
+                        <li>Animações muito longas (cansam o usuário)</li>
+                        <li>Muitas animações simultâneas na tela</li>
+                        <li>Animações que causam motion sickness</li>
+                        <li>Esquecer de adicionar prefixos -webkit-</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="explanation">
+                <strong>🎯 Acessibilidade:</strong> Respeite a preferência <code>prefers-reduced-motion</code>
+                <div class="code-display">
+<span class="keyword">@media</span> (prefers-reduced-motion: reduce) {
+    * {
+        <span class="property">animation-duration</span>: <span class="value">0.01ms</span> !important;
+        <span class="property">transition-duration</span>: <span class="value">0.01ms</span> !important;
+    }
+}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="animation-script.js"></script>
+</body>
+</html>
